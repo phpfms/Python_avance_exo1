@@ -1,7 +1,11 @@
-"# python avancé exo1" 
+# Ecole
 
-Chaque exercice doit faire l’objet d’un projet PyCharm et d’un dépôt GitHub dédié l’hébergeant, comportant un fichier README.md documentant son utilisation. Chaque petite étape de la réalisation d’un exercice doit faire l’objet d’un commit, dont le message permet de comprendre clairement ce que comporte cette étape en question.
-L’anglais est à utiliser pour les identificateurs de variables, méthodes et classes (les commentaires et messages affichés à l’utilisateur peuvent en revanche être en français).
-Exercice 1 : Ecole persistante
-Compléter l’application Ecole comportant un embryon de l’implémentation du design pattern DAO pour permettre une persistance complète de l’application. Modifier celle-ci pour qu’elle charge au lancement toutes les entités de la BD ecole.
-Optionnel : compléter l’application pour qu’elle réponde à ses spécifications complètes (cf. Specs-TP_UML-Ecole.pdf)
+Diagrammes UML (cas d'utilisation, classes et séquence) et
+code Python en correction de l'exercice `TP_UML-Ecole.pdf`,
+plus embryon d'implémentation du _design pattern_ DAO
+
+Faire ceci sur le sous-répertoire `ecole` du répertoire principal `ecole` pour indiquer
+à PyCharm qu'il s'agit du répertoire de l'application
+(pour ne pas avoir d'avertissements sur des `import` non résolus) :
+* clic-droit > _Mark directory as_ > _Sources root_
+* Menu > File > _Invalidate Caches_ > _Invalidate and Restart_
