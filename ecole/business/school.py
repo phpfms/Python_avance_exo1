@@ -40,14 +40,15 @@ class School:
         self.students.append(student)
 
     def display_courses_list(self) -> None:
-        """Affichage de la liste des cours avec pour chacun d'eux :
-        - leur enseignant
-        - la liste des élèves le suivant"""
+        """Affiche la liste des cours avec leur enseignant."""
         for course in self.courses:
-            print(f"cours de {course}")
-            for student in course.students_taking_it:
-                print(f"- {student}")
-            print()
+            if course.teacher is not None:
+                print(
+                    f"- {course.name} : "
+                    f"{course.teacher.first_name} {course.teacher.last_name}"
+                )
+            else:
+                print(f"- {course.name} : aucun enseignant")
 
     @staticmethod
     def get_course_by_id(id_course: int):
@@ -59,10 +60,10 @@ class School:
         """Initialisation d'un jeu de test pour l'école."""
         
         # création des étudiants et rattachement à leur adresse
-        paul: Student    = Student('Paul', 'Dubois', 12)
-        valerie: Student = Student('Valérie', 'Dumont', 13)
-        louis: Student   = Student('Louis', 'Berthot', 11)
-        philippe: Student = Student('philippe', 'philippe', 10)
+        paul: Student    = Student('Paul', 'Dubois', 12, 2)
+        valerie: Student = Student('Valérie', 'Dumont', 13, 3)
+        louis: Student   = Student('Louis', 'Berthot', 11, 4)
+        philippe: Student = Student('philippe', 'philippe', 10, 5)
 
         paul.address    = Address('12 rue des Pinsons', 'Castanet', '31320')
         valerie.address = Address('43 avenue Jean Zay', 'Toulouse', '31200')

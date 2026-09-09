@@ -51,11 +51,6 @@ class Course:
             # spécification de l'enseignant de ce cours
             self.teacher = teacher
 
-    # !!!!! pense bete cette methode devrait peut etre pas etre là   !!!!!
-    def get_teacher_by_id(id_teacher: int):
-        teacher_dao: TeacherDao = TeacherDao()
-        return teacher_dao.read(id_teacher)
-
     def get_id_teacher_in_object(self) -> Optional[int]:
         if self.teacher is not None: return self.teacher.id_teacher
         return None

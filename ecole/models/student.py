@@ -17,13 +17,16 @@ class Student(Person):
     - student_nbr   : n° d'élève
     - courses_taken : liste des cours pris par cet élève
     """
-    student_nbr: int = field(init=False)
+    student_nbr: int
     courses_taken: list[Course] = field(default_factory=list, init=False)
 
     def add_course(self, course: Course) -> None:
         """Ajout du cours course à la liste des cours suivis par l'élève."""
-        self.courses_taken.append(course)
-        course.students_taking_it.append(self)
+        if course not in self.courses_taken:
+            self.courses_taken.append(course)
+
+        if self not in course.students_taking_it:
+            course.students_taking_it.append(self)
 
     def __str__(self) -> str:
         person_str = super().__str__()
