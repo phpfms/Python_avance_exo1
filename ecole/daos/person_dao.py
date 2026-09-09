@@ -1,52 +1,52 @@
 # -*- coding: utf-8 -*-
 
 """
-Classe Dao[Address]
+Classe Dao[Person]
 """
 
-from models.address import Address
+from models.person import Person
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional
 
 @dataclass
-class AddressDao(Dao[Address]):
+class PersonDao(Dao[Person]):
 
-    def create(self, address: Address) -> int:
+    def create(self, person: Person) -> int:
         with Dao.connection.cursor() as cursor:
-            sql = "INSERT INTO address (street, city, postal_code) VALUES (%s, %s, %s)"
-            cursor.execute( sql,(address.street, address.city, address.postal_code))
-            id_address = cursor.lastrowid
+            sql = "INSERT INTO person (first_name, last_name, age) VALUES (%s, %s, %s)"
+            cursor.execute( sql,(person.first_name, person.last_name, person.age))
+            id_person = cursor.lastrowid
         Dao.connection.commit()
-        address.id = id_address
-        return id_address
+        person.id = id_person
+        return id_person
 
-    def read(self, id_address: int) -> Optional[Address]:
-        """Renvoie le cours correspondant à l'entité dont l'id est id_address
+    def read(self, id_person: int) -> Optional[Person]:
+        """Renvoie le cours correspondant à l'entité dont l'id est id_person
            (ou None s'il n'a pu être trouvé)"""
-        address: Optional[Address]
+        person: Optional[Person]
         with Dao.connection.cursor() as cursor:
-            sql = "SELECT * FROM address WHERE id_address=%s"
-            cursor.execute(sql, (id_address,))
+            sql = "SELECT * FROM person WHERE id_person=%s"
+            cursor.execute(sql, (id_person,))
             record = cursor.fetchone()
         if record is not None:
-            address = Address(record['street'], record['city'], record['postal_code'])
-            address.id = record['id_address']
+            person = Person(record['first_name'], record['last_name'], record['age'])
+            person.id = record['id_person']
         else:
-            address = None
+            person = None
 
-        return address
+        return person
 
-    def update(self, address: Address) -> None:
+    def update(self, person: Person) -> None:
         """Modifie une adresse existante en BDD."""
         with Dao.connection.cursor() as cursor:
-            sql = " UPDATE address SET street=%s, city=%s, postal_code=%s WHERE id_address=%s "
-            cursor.execute( sql,(address.street,address.city,address.postal_code,address.id))
+            sql = " UPDATE person SET first_name=%s, last_name=%s, age=%s WHERE id_person=%s "
+            cursor.execute(sql, (person.first_name, person.last_name, person.age, person.id))
         Dao.connection.commit()
 
-    def delete(self, id_address: int) -> None:
+    def delete(self, id_person: int) -> None:
         """Supprime une adresse de la BDD."""
         with Dao.connection.cursor() as cursor:
-            sql = "DELETE FROM address WHERE id_address=%s"
-            cursor.execute(sql, (id_address,))
+            sql = "DELETE FROM person WHERE id_person=%s"
+            cursor.execute(sql, (id_person,))
         Dao.connection.commit()
