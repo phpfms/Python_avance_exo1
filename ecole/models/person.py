@@ -5,6 +5,7 @@ Classe abstraite Person, mère de Student et Teacher
 """
 
 from abc import ABC
+from typing import Optional
 from dataclasses import dataclass, field
 
 from .address import Address
@@ -13,6 +14,7 @@ from .address import Address
 @dataclass
 class Person(ABC):
     """Personne liée à l'école : enseignant ou élève."""
+    id_person: Optional[int] = field(default=None, init=False)
     first_name: str
     last_name: str
     age: int

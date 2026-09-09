@@ -28,7 +28,7 @@ class TeacherDao(Dao[Teacher]):
 
     def read(self, id_teacher: int) -> Optional[Teacher]:
         "Renvoie le Teacher correspondant à id_teacher ou None."
-
+        teacher: Optional[Teacher]
         with Dao.connection.cursor() as cursor:
             sql = """SELECT teacher.id_teacher, teacher.hiring_date,
                        person.id_person, person.first_name,

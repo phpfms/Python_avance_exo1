@@ -15,7 +15,7 @@ def test_create():
     id_person = dao.create(person)
 
     assert id_person is not None
-    assert person.id == id_person
+    assert person.id_person == id_person
 
 
 def test_read():
@@ -27,7 +27,7 @@ def test_read():
     result = dao.read(id_person)
 
     assert result is not None
-    assert result.id == id_person
+    assert result.id_person == id_person
     assert result.first_name == "Paul"
     assert result.last_name == "Dubois"
     assert result.age == 12
@@ -48,7 +48,7 @@ def test_update():
     result = dao.read(id_person)
 
     assert result is not None
-    assert result.id == id_person
+    assert result.id_person == id_person
     assert result.first_name == "Jean"
     assert result.last_name == "Dupont"
     assert result.age == 25
@@ -65,4 +65,3 @@ def test_delete():
     result = dao.read(id_person)
 
     assert result is None
-

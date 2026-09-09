@@ -18,7 +18,7 @@ class PersonDao(Dao[Person]):
             cursor.execute( sql,(person.first_name, person.last_name, person.age))
             id_person = cursor.lastrowid
         Dao.connection.commit()
-        person.id = id_person
+        person.id_person = id_person
         return id_person
 
     def read(self, id_person: int) -> Optional[Person]:
@@ -31,7 +31,7 @@ class PersonDao(Dao[Person]):
             record = cursor.fetchone()
         if record is not None:
             person = Person(record['first_name'], record['last_name'], record['age'])
-            person.id = record['id_person']
+            person.id_person = record['id_person']
         else:
             person = None
 
@@ -41,7 +41,7 @@ class PersonDao(Dao[Person]):
         """Modifie une adresse existante en BDD."""
         with Dao.connection.cursor() as cursor:
             sql = " UPDATE person SET first_name=%s, last_name=%s, age=%s WHERE id_person=%s "
-            cursor.execute(sql, (person.first_name, person.last_name, person.age, person.id))
+            cursor.execute(sql, (person.first_name, person.last_name, person.age, person.id_person))
         Dao.connection.commit()
 
     def delete(self, id_person: int) -> None:
