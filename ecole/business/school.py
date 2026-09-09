@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from datetime import date
 
 from daos.course_dao import CourseDao
+from daos.address_dao import AddressDao
 from models.address import Address
 from models.course import Course
 from models.teacher import Teacher
@@ -50,6 +51,7 @@ class School:
 
     @staticmethod
     def get_course_by_id(id_course: int):
+        #print("Module =", CourseDao.__module__)
         course_dao: CourseDao = CourseDao()
         return course_dao.read(id_course)
 
@@ -60,13 +62,15 @@ class School:
         paul: Student    = Student('Paul', 'Dubois', 12)
         valerie: Student = Student('Valérie', 'Dumont', 13)
         louis: Student   = Student('Louis', 'Berthot', 11)
+        philippe: Student = Student('philippe', 'philippe', 10)
 
-        paul.address    = Address('12 rue des Pinsons', 'Castanet', 31320)
-        valerie.address = Address('43 avenue Jean Zay', 'Toulouse', 31200)
-        louis.address   = Address('7 impasse des Coteaux', 'Cornebarrieu', 31150)
+        paul.address    = Address('12 rue des Pinsons', 'Castanet', '31320')
+        valerie.address = Address('43 avenue Jean Zay', 'Toulouse', '31200')
+        louis.address   = Address('7 impasse des Coteaux', 'Cornebarrieu', '31150')
+        philippe.address = Address('123 rue de loin', 'tatouine', '99999')
 
         # ajout de ceux-ci à l'école
-        for student in [paul, valerie, louis]:
+        for student in [paul, valerie, louis, philippe]:
             self.add_student(student)
 
         # création des cours
@@ -84,12 +88,14 @@ class School:
                                           date(2024, 3, 15))
         anglais: Course = Course("Anglais", date(2024, 2, 12),
                                             date(2024, 2, 24))
+        espagnol: Course = Course("espagnol", date(2023, 1, 11),
+                                             date(2026, 12, 31))
         sport: Course = Course("Sport", date(2024, 3, 4),
                                         date(2024, 3, 15))
 
         # ajout de ceux-ci à l'école
         for course in [francais, histoire, geographie, mathematiques,
-                       physique, chimie, anglais, sport]:
+                       physique, chimie, anglais, espagnol, sport]:
             self.add_course(course)
 
         # création des enseignants
@@ -114,17 +120,20 @@ class School:
         for course in [mathematiques, physique, geographie, sport]:
             louis.add_course(course)
 
+        for course in [francais, anglais, espagnol, histoire]:
+            philippe.add_course(course)
+
         # association des enseignants aux cours qu'ils enseignent
         victor.add_course(francais)
-
+        michel.add_course(espagnol)
         jules.add_course(histoire)
         jules.add_course(geographie)
-
         sophie.add_course(mathematiques)
-
         marie.add_course(physique)
         marie.add_course(chimie)
-
         william.add_course(anglais)
-
         michel.add_course(sport)
+
+        # gestion des addresses en BDD
+        address_dao = AddressDao()
+        address_dao.create(philippe.address)

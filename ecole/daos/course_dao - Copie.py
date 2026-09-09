@@ -5,9 +5,11 @@ Classe Dao[Course]
 """
 
 from models.course import Course
+from daos.teacher_dao import TeacherDao
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional
+
 
 
 @dataclass
@@ -22,7 +24,7 @@ class CourseDao(Dao[Course]):
         return 0
 
     def read(self, id_course: int) -> Optional[Course]:
-        """Renvoit le cours correspondant à l'entité dont l'id est id_course
+        """Renvoie le cours correspondant à l'entité dont l'id est id_course
            (ou None s'il n'a pu être trouvé)"""
         course: Optional[Course]
         
@@ -31,9 +33,19 @@ class CourseDao(Dao[Course]):
             cursor.execute(sql, (id_course,))
             record = cursor.fetchone()
         if record is not None:
+            print("RECORD =", record)
+            print("ID TEACHER =", record['id_teacher'])
             course = Course(record['name'], record['start_date'], record['end_date'])
             course.id = record['id_course']
+
+            teacher_dao = TeacherDao()
+            teacher = teacher_dao.read(record['id_teacher'])
+
+            print("TEACHER =", teacher)
+            if teacher is not None:
+                course.set_teacher(teacher)
         else:
+            print("Aucun cours trouvé")
             course = None
 
         return course

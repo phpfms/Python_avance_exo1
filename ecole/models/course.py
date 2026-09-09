@@ -7,16 +7,18 @@ Classe Course
 # pour simplifier les annotations de types des classes non importées à l'exécution
 # (teacher: Teacher plutôt que teacher: 'Teacher')
 from __future__ import annotations
-
 from typing import Optional, TYPE_CHECKING
 from dataclasses import dataclass, field
 from datetime import date
 
 # pour éviter une circularité des imports à l'exécution,
-# les classes Student et Teacher important la classe Course
+# les classes Student et Teacher importent la classe Course
+# J'importe Student et Teacher uniquement pour que les outils de vérification de types sachent qu'ils existent,
+# mais je ne fais pas ces imports lorsque le programme s'exécute.
 if TYPE_CHECKING:
     from .student import Student
     from .teacher import Teacher
+    from daos.teacher_dao import TeacherDao
 
 
 @dataclass
@@ -48,6 +50,15 @@ class Course:
             teacher.courses_teached.append(self)
             # spécification de l'enseignant de ce cours
             self.teacher = teacher
+
+    # !!!!! pense bete cette methode devrait peut etre pas etre là   !!!!!
+    def get_teacher_by_id(id_teacher: int):
+        teacher_dao: TeacherDao = TeacherDao()
+        return teacher_dao.read(id_teacher)
+
+    def get_id_teacher_in_object(self) -> Optional[int]:
+        if self.teacher is not None: return self.teacher.id_teacher
+        return None
 
     def add_student(self, student: Student) -> None:
         """Ajoute :

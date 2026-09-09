@@ -14,8 +14,9 @@ import pymysql.cursors
 class Dao[T](ABC):
     connection: ClassVar[pymysql.Connection] = \
         pymysql.connect(host='localhost',
-                        user='ecole',
-                        password='FqDEuKWd9TxLERZg6ooh',
+                        port=3306,
+                        user='root',
+                        password='',
                         database='ecole',
                         cursorclass=pymysql.cursors.DictCursor)
 
@@ -30,7 +31,7 @@ class Dao[T](ABC):
 
     @abstractmethod
     def read(self, id_entity: int) -> Optional[T]:
-        """Renvoit l'objet correspondant à l'entité dont l'id est id_entity
+        """Renvoie l'objet correspondant à l'entité dont l'id est id_entity
            (ou None s'il n'a pu être trouvé)"""
         ...
 

@@ -18,7 +18,7 @@ class Teacher(Person):
     - hiring_date     : date d'arrivée dans l'école
     - courses_teached : cours qu'il ou elle enseigne
     """
-    id: Optional[int] = field(default=None, init=False)
+    id_teacher: Optional[int] = field(default=None, init=False)
     hiring_date: date
     courses_teached: list[Course] = field(default_factory=list, init=False)
 

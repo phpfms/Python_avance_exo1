@@ -6,6 +6,7 @@ Application de gestion d'une école
 """
 
 from business.school import School
+from models.course import Course
 
 
 def main() -> None:
@@ -21,11 +22,9 @@ Bienvenue dans notre école
     school.init_static()
 
     # affichage de la liste des cours, leur enseignant et leurs élèves
-    school.display_courses_list()
-
-    print(school.get_course_by_id(1))
-    print(school.get_course_by_id(2))
-    print(school.get_course_by_id(9))
+    # school.display_courses_list()
+    # course1: Course = school.get_course_by_id(1)
+    #print(school.get_course_by_id(2))
 
 
 if __name__ == '__main__':
