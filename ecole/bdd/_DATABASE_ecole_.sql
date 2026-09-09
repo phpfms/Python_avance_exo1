@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mer. 09 sep. 2026 à 11:18
+-- Généré le : mer. 09 sep. 2026 à 12:07
 -- Version du serveur : 11.7.1-MariaDB
 -- Version de PHP : 8.5.4
 
@@ -39,23 +39,7 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`id_address`, `street`, `city`, `postal_code`) VALUES
-(1, '12 rue des Pinsons', 'Castanet', '31320'),
-(2, '43 avenue Jean Zay', 'Toulouse', '31200'),
-(3, '7 impasse des Coteaux', 'Cornebarrieu', '31150'),
-(4, '123 rue de loin', 'tatouine', '99999'),
-(6, '123 rue de loin', 'tatouine', '99999'),
-(7, '123 rue de loin', 'tatouine', '99999'),
-(8, '123 rue de loin', 'tatouine', '99999'),
-(9, '123 rue de loin', 'tatouine', '99999'),
-(10, '10 rue de Paris', 'Toulouse', '31000'),
-(11, '10 rue de Paris', 'Toulouse', '31000'),
-(12, '20 rue de Bordeaux', 'Bordeaux', '33000'),
-(14, '10 rue de Paris', 'Toulouse', '31000'),
-(15, '10 rue de Paris', 'Toulouse', '31000'),
-(16, '20 rue de Bordeaux', 'Bordeaux', '33000'),
-(18, '10 rue de Paris', 'Toulouse', '31000'),
-(19, '10 rue de Paris', 'Toulouse', '31000'),
-(20, '20 rue de Bordeaux', 'Bordeaux', '33000');
+(1, 'ADEFINIR', 'ADEFINIR', '0');
 
 -- --------------------------------------------------------
 
@@ -76,17 +60,7 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id_course`, `name`, `start_date`, `end_date`, `id_teacher`) VALUES
-(1, 'Français', '2024-01-29', '2024-02-16', 1),
-(2, 'Histoire', '2024-02-05', '2024-02-16', 2),
-(3, 'Géographie', '2024-02-05', '2024-02-16', 2),
-(4, 'Mathématiques', '2024-02-12', '2024-03-08', 3),
-(5, 'Physique', '2024-02-19', '2024-03-08', 4),
-(6, 'Chimie', '2024-02-26', '2024-03-15', 4),
-(7, 'Anglais', '2024-02-12', '2024-02-24', 5),
-(8, 'Sport', '2024-03-04', '2024-03-15', 6),
-(9, 'Mathématiques', '2024-02-12', '2024-03-08', 15),
-(10, 'Mathématiques', '2024-02-12', '2024-03-08', 16),
-(11, 'Physique', '2024-02-19', '2024-03-15', 17);
+(1, 'ADEFINIR', '2000-01-01', '2000-01-02', 1);
 
 -- --------------------------------------------------------
 
@@ -107,57 +81,7 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `age`, `id_address`) VALUES
-(1, 'Paul', 'Dubois', 12, 1),
-(2, 'Valérie', 'Dumont', 13, 2),
-(3, 'Louis', 'Berthot', 11, 3),
-(4, 'Victor', 'Hugo', 23, NULL),
-(5, 'Jules', 'Michelet', 32, NULL),
-(6, 'Sophie', 'Germain', 25, NULL),
-(7, 'Marie', 'Curie', 31, NULL),
-(8, 'William', 'Shakespeare', 34, NULL),
-(9, 'Michel', 'Platini', 42, NULL),
-(10, 'Paul', 'Dubois', 12, NULL),
-(11, 'Paul', 'Dubois', 12, NULL),
-(12, 'Jean', 'Dupont', 25, NULL),
-(14, 'Paul', 'Dubois', 12, NULL),
-(15, 'Paul', 'Dubois', 12, NULL),
-(16, 'Jean', 'Dupont', 25, NULL),
-(18, 'Victor', 'Hugo', 23, NULL),
-(19, 'Victor', 'Hugo', 23, NULL),
-(20, 'Victor', 'Hugo', 23, NULL),
-(21, 'Victor', 'Hugo', 23, NULL),
-(22, 'Victor', 'Hugo', 23, NULL),
-(23, 'Victor', 'Hugo', 23, NULL),
-(24, 'Victor', 'Hugo', 23, NULL),
-(25, 'Victor', 'Hugo', 23, NULL),
-(26, 'Victor', 'Hugo', 23, NULL),
-(27, 'Victor', 'Hugo', 23, NULL),
-(28, 'Victor', 'Hugo', 23, NULL),
-(29, 'Victor', 'Hugo', 23, NULL),
-(30, 'Paul', 'Dubois', 12, NULL),
-(31, 'Paul', 'Dubois', 12, NULL),
-(32, 'Jean', 'Dupont', 25, NULL),
-(34, 'Paul', 'Dubois', 12, NULL),
-(35, 'Paul', 'Dubois', 12, NULL),
-(36, 'Jean', 'Dupont', 25, NULL),
-(38, 'Paul', 'Dubois', 12, NULL),
-(39, 'Paul', 'Dubois', 12, NULL),
-(40, 'Paul', 'Dubois', 12, NULL),
-(42, 'Paul', 'Dubois', 12, NULL),
-(43, 'Paul', 'Dubois', 12, NULL),
-(44, 'Jean', 'Dupont', 25, NULL),
-(46, 'Paul', 'Dubois', 12, NULL),
-(47, 'Paul', 'Dubois', 12, NULL),
-(48, 'Paul', 'Dubois', 12, NULL),
-(49, 'Paul', 'Dubois', 12, NULL),
-(50, 'Paul', 'Dubois', 12, NULL),
-(51, 'Paul', 'Dubois', 12, NULL),
-(52, 'Paul', 'Dubois', 12, NULL),
-(53, 'Paul', 'Dubois', 12, NULL),
-(54, 'Paul', 'Dubois', 12, NULL),
-(55, 'Paul', 'Dubois', 12, NULL),
-(56, 'Jean', 'Dupont', 15, NULL),
-(57, 'Paul', 'Dubois', 12, NULL);
+(1, 'ADEFINIR', 'ADEFINIR', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -175,13 +99,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`student_nbr`, `id_person`) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 49),
-(5, 54),
-(6, 55),
-(7, 56);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -199,16 +117,7 @@ CREATE TABLE `takes` (
 --
 
 INSERT INTO `takes` (`student_nbr`, `id_course`) VALUES
-(2, 1),
-(2, 2),
-(1, 3),
-(3, 3),
-(3, 4),
-(1, 5),
-(3, 5),
-(2, 6),
-(1, 7),
-(3, 8);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -227,22 +136,7 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`id_teacher`, `hiring_date`, `id_person`) VALUES
-(1, '2023-09-04', 4),
-(2, '2023-09-04', 5),
-(3, '2023-09-04', 6),
-(4, '2023-09-04', 7),
-(5, '2023-09-04', 8),
-(6, '2023-09-04', 9),
-(7, '2023-09-04', 18),
-(8, '2023-09-04', 19),
-(9, '2023-09-04', 20),
-(11, '2023-09-04', 22),
-(12, '2023-09-04', 23),
-(13, '2024-09-01', 24),
-(15, '2023-09-04', 26),
-(16, '2023-09-04', 27),
-(17, '2023-09-04', 28),
-(18, '2023-09-04', 29);
+(1, '2000-01-01', 1);
 
 --
 -- Index pour les tables déchargées
@@ -266,7 +160,8 @@ ALTER TABLE `course`
 --
 ALTER TABLE `person`
   ADD PRIMARY KEY (`id_person`),
-  ADD UNIQUE KEY `id_address` (`id_address`);
+  ADD UNIQUE KEY `id_address` (`id_address`),
+  ADD UNIQUE KEY `unique_person` (`first_name`,`last_name`,`id_address`);
 
 --
 -- Index pour la table `student`
@@ -297,31 +192,31 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT pour la table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id_address` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_address` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `person`
 --
 ALTER TABLE `person`
-  MODIFY `id_person` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_person` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_nbr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `student_nbr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id_teacher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_teacher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées

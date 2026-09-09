@@ -19,7 +19,6 @@ class CourseDao(Dao[Course]):
         """
         with Dao.connection.cursor() as cursor:
             sql = "INSERT INTO course (name, start_date, end_date, id_teacher) VALUES (%s, %s, %s, %s)"
-            #cursor.execute(sql, (course.name, course.start_date, course.end_date, course.teacher.id_teacher if course.teacher is not None else None))
             cursor.execute(sql, (course.name, course.start_date, course.end_date, course.teacher.id_teacher))
             id_course = cursor.lastrowid
         Dao.connection.commit()
