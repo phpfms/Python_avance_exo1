@@ -1,6 +1,11 @@
-# fichier qui permet à l'utilisateur de faire des choix numeriques
+# fichier qui permet à l'utilisateur de faire des choix numeriques, il joue un role de controleur
 
-from business.school import School
+from business.business_student import BusinessStudent
+from business.business_teacher import BusinessTeacher
+from business.business_course import BusinessCourse
+from business.business_address import BusinessAddress
+from business.business_person import BusinessPerson
+from display.display_student import DisplayStudent
 from menu import Menu
 
 
@@ -8,13 +13,20 @@ class Application:
 
     def __init__(self):
         """Initialise l'application."""
-        self.school = School()
         self.menu = Menu()
 
-    def run(self):
-        """Lance l'application."""
+        # Gestion métier
+        self.student = BusinessStudent()
+        self.teacher = BusinessTeacher()
+        self.course = BusinessCourse()
+        self.address = BusinessAddress()
+        self.person = BusinessPerson()
 
-        self.school.init_static()
+        # Affichage
+        self.display_student = DisplayStudent()
+
+    def run(self):
+        """Lance l'application et affiche le menu principal."""
 
         conti = True
 
@@ -50,7 +62,8 @@ class Application:
 
             if choix == "1":
                 print("Afficher les étudiants")
-                self.school.display_students()
+                students = self.student.get_students()
+                self.display_student.display_students(students)
 
             elif choix == "2":
                 print("Afficher les cours d'un étudiant")
@@ -59,6 +72,18 @@ class Application:
             elif choix == "3":
                 print("Afficher les enseignants d'un étudiant")
                 # self.school.display_student_teachers()
+
+            elif choix == "4":
+                print("Ajouter un etudiant")
+                # ...
+
+            elif choix == "5":
+                print("Modifier un etudiant")
+                # ...
+
+            elif choix == "6":
+                print("Supprimer un etudiant")
+                # ...
 
             elif choix == "0":
                 print("Retour au menu principal.")
@@ -98,6 +123,18 @@ class Application:
                 print("Créer un cours")
                 # ...
 
+            elif choix == "6":
+                print("Ajouter un professeur")
+                # ...
+
+            elif choix == "7":
+                print("Modifier un professeur")
+                # ...
+
+            elif choix == "8":
+                print("Supprimer un professeur")
+                # ...
+
             elif choix == "0":
                 print("Retour au menu principal.")
                 conti = False
@@ -114,6 +151,7 @@ class Application:
             choix = self.menu.display_course_menu()
 
             if choix == "1":
+                print("Afficher la liste des cours")
                 self.school.display_courses_list()
 
             elif choix == "2":
@@ -123,6 +161,17 @@ class Application:
             elif choix == "3":
                 print("Afficher l'enseignant d'un cours")
                 # ...
+
+            elif choix == "4":
+                print("Ajouter un cours")
+                # ...
+
+            elif choix == "5":
+                print("Modifier un cours")
+                # ...
+
+            elif choix == "6":
+                print("Supprimer un cours")
 
             elif choix == "0":
                 print("Retour au menu principal.")
@@ -145,6 +194,18 @@ class Application:
 
             elif choix == "2":
                 print("Afficher les personnes habitant à une adresse")
+                # ...
+
+            elif choix == "3":
+                print("Ajouter une adresse")
+                # ...
+
+            elif choix == "4":
+                print("Modifier une adresse")
+                # ...
+
+            elif choix == "5":
+                print("Supprimer une adresse")
                 # ...
 
             elif choix == "0":
