@@ -15,9 +15,9 @@ class PersonDao(Dao[Person]):
     def create(self, person: Person) -> int:
         with Dao.connection.cursor() as cursor:
             sql = "INSERT INTO person (first_name, last_name, age) VALUES (%s, %s, %s)"
-            cursor.execute( sql,(person.first_name, person.last_name, person.age))
+            cursor.execute( sql,(person.first_name, person.last_name, person.age)) # demande la modif
             id_person = cursor.lastrowid
-        Dao.connection.commit()
+        Dao.connection.commit() # valide la modif
         person.id_person = id_person
         return id_person
 

@@ -24,6 +24,8 @@ class Menu:
         print("4. Ajouter un étudiant")
         print("5. Modifier un étudiant")
         print("6. Supprimer un étudiant")
+        print("7. Inscrire un étudiant à un cours")
+        print("8. Désinscrire un étudiant d'un cours")
         print("0. Retour")
 
         return input("Votre choix : ")

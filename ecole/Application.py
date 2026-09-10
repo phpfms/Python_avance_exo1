@@ -1,4 +1,5 @@
-# fichier qui permet à l'utilisateur de faire des choix numeriques, il joue un role de controleur
+# fichier qui permet à l'utilisateur de faire des choix numeriques,
+# il joue un role de controleur
 
 from business.business_student import BusinessStudent
 from business.business_teacher import BusinessTeacher
@@ -8,6 +9,8 @@ from business.business_person import BusinessPerson
 
 from displays.display_student import DisplayStudent
 from displays.display_course import DisplayCourse
+
+from models.student import Student
 
 from menu import Menu
 
@@ -71,15 +74,88 @@ class Application:
 
             elif choix == "2":
                 print("Afficher les cours d'un étudiant")
-                # self.school.display_student_courses()
+                # ...
 
             elif choix == "3":
                 print("Afficher les enseignants d'un étudiant")
-                # self.school.display_student_teachers()
+                # ...
 
             elif choix == "4":
-                print("Ajouter un etudiant")
-                # ...
+                print("\n===== AJOUTER UN ÉTUDIANT =====")
+
+                # Saisie du prénom
+                valide = False
+
+                while not valide:
+                    first_name = input("Prénom : ").strip()
+
+                    if first_name == "":
+                        print("Le prénom ne peut pas être vide.")
+
+                    elif not first_name.replace("-", "").replace(
+                        " ", ""
+                    ).isalpha():
+                        print(
+                            "Le prénom ne doit contenir que des lettres."
+                        )
+
+                    else:
+                        valide = True
+
+                # Saisie du nom
+                valide = False
+
+                while not valide:
+                    last_name = input("Nom : ").strip()
+
+                    if last_name == "":
+                        print("Le nom ne peut pas être vide.")
+
+                    elif not last_name.replace("-", "").replace(
+                        " ", ""
+                    ).isalpha():
+                        print(
+                            "Le nom ne doit contenir que des lettres."
+                        )
+
+                    else:
+                        valide = True
+
+                # Saisie de l'âge
+                valide = False
+
+                while not valide:
+                    age_input = input("Âge : ").strip()
+
+                    try:
+                        age = int(age_input)
+
+                        if age < 1 or age > 130:
+                            print(
+                                "L'âge doit être compris entre "
+                                "1 et 130 ans."
+                            )
+
+                        else:
+                            valide = True
+
+                    except ValueError:
+                        print("Veuillez entrer un nombre entier.")
+
+                # Création de l'étudiant
+                student = Student(
+                    first_name,
+                    last_name,
+                    age
+                )
+
+                # Enregistrement en BDD
+                student_nbr = self.student.add_student(student)
+
+                print(
+                    f"Étudiant créé avec succès. "
+                    f"Numéro étudiant : {student_nbr}"
+                )
 
             elif choix == "5":
                 print("Modifier un etudiant")
@@ -87,6 +163,14 @@ class Application:
 
             elif choix == "6":
                 print("Supprimer un etudiant")
+                # ...
+
+            elif choix == "7":
+                print("Inscrire un étudiant à un cours")
+                # ...
+
+            elif choix == "8":
+                print("Désinscrire un étudiant d'un cours")
                 # ...
 
             elif choix == "0":
@@ -106,7 +190,7 @@ class Application:
 
             if choix == "1":
                 print("Afficher les professeurs")
-                # self.school.display_teachers()
+                # ...
 
             elif choix == "2":
                 print("Afficher les élèves d'un professeur")
@@ -177,6 +261,7 @@ class Application:
 
             elif choix == "6":
                 print("Supprimer un cours")
+                # ...
 
             elif choix == "0":
                 print("Retour au menu principal.")

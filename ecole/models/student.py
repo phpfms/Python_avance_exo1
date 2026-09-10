@@ -17,7 +17,7 @@ class Student(Person):
     - student_nbr   : n° d'élève
     - courses_taken : liste des cours pris par cet élève
     """
-    student_nbr: int
+    student_nbr: Optional[int] = field(default=None, init=False) # lors de la creation de l'etudiant on peut pas donner de numero car c la ase de donnee qui le genere
     courses_taken: list[Course] = field(default_factory=list, init=False)
 
     def add_course(self, course: Course) -> None:

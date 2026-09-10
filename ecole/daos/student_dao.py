@@ -1,3 +1,5 @@
+# fichier de gestion des requetes sql et qui cré un objet etudiant dans read()
+
 # -*- coding: utf-8 -*-
 
 """
@@ -8,7 +10,7 @@ from models.student import Student
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional
-
+import mysql.connector
 
 @dataclass
 class StudentDao(Dao[Student]):
@@ -21,12 +23,15 @@ class StudentDao(Dao[Student]):
             student_nbr = cursor.lastrowid
 
         Dao.connection.commit()
+        # Récupère le numéro généré par la BDD
         student.student_nbr = student_nbr
         return student_nbr
 
     def read(self, student_nbr: int) -> Optional[Student]:
         """Renvoie le cours correspondant à l'entité dont l'id est id_student
-           (ou None s'il n'a pu être trouvé)"""
+           (ou None s'il n'a pu être trouvé)
+           Fonction qui crée un objet étudient
+           """
         student: Optional[Student]
 
         with Dao.connection.cursor() as cursor:
@@ -44,6 +49,7 @@ class StudentDao(Dao[Student]):
             cursor.execute(sql, (student_nbr,))
             record = cursor.fetchone()
 
+        # ici on cré un objet étudiant
         if record is not None:
             student = Student(
                 record['first_name'],
@@ -58,12 +64,13 @@ class StudentDao(Dao[Student]):
         return student
 
     def read_all(self) -> list[Student]:
-        """Renvoie la liste de tous les étudiants."""
+        """Renvoie la liste de tous les étudiants. (créé plein d'objets étudiant et les met en liste"""
 
         students = []
 
-        with Dao.connection.cursor() as cursor:
-            sql = """
+        try:
+            with Dao.connection.cursor() as cursor:
+                sql = """
                 SELECT student.student_nbr,
                        person.id_person,
                        person.first_name,
@@ -74,20 +81,24 @@ class StudentDao(Dao[Student]):
                 ORDER BY student.student_nbr
             """
 
-            cursor.execute(sql)
-            records = cursor.fetchall()
+                cursor.execute(sql)
+                records = cursor.fetchall()
 
-        for record in records:
-            student = Student(
-                record['first_name'],
-                record['last_name'],
-                record['age'],
-                record['student_nbr']
-            )
+            for record in records:
+                student = Student(
+                    record['first_name'],
+                    record['last_name'],
+                    record['age']
+                )
 
-            student.id_person = record['id_person']
+                # Récupération des identifiants venant de la BDD
+                student.id_person = record['id_person']
+                student.student_nbr = record['student_nbr']
 
-            students.append(student)
+                students.append(student)
+
+        except mysql.connector.Error as error:
+            print(f"Erreur lors de la lecture des étudiants : {error}")
 
         return students
 

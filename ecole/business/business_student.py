@@ -7,11 +7,13 @@ Gestion métier des étudiants
 """
 
 from daos.student_dao import StudentDao
+from daos.person_dao import PersonDao
 
 
 class BusinessStudent:
 
     def __init__(self):
+        self.person_dao = PersonDao()
         self.student_dao = StudentDao()
 
     def get_student_by_id(self, student_nbr):
@@ -24,6 +26,10 @@ class BusinessStudent:
 
     def add_student(self, student):
         """Ajoute un étudiant en base de données."""
+        # Création de la personne
+        # l'ecriture suivante fonctionne car student est une personne
+        self.person_dao.create(student)
+        # Création de l'étudiant
         return self.student_dao.create(student)
 
     def update_student(self, student):
