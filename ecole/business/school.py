@@ -9,6 +9,7 @@ from datetime import date
 
 from daos.course_dao import CourseDao
 from daos.address_dao import AddressDao
+from daos.student_dao import StudentDao
 from models.address import Address
 from models.course import Course
 from models.teacher import Teacher
@@ -39,6 +40,12 @@ class School:
         """Ajout de l'élève spécifié à la liste des élèves."""
         self.students.append(student)
 
+    @staticmethod
+    def get_course_by_id(id_course: int):
+        # print("Module =", CourseDao.__module__)
+         course_dao: CourseDao = CourseDao()
+         return course_dao.read(id_course)
+
     def display_courses_list(self) -> None:
         """Affiche la liste des cours avec leur enseignant."""
         for course in self.courses:
@@ -50,11 +57,18 @@ class School:
             else:
                 print(f"- {course.name} : aucun enseignant")
 
-    @staticmethod
-    def get_course_by_id(id_course: int):
-        #print("Module =", CourseDao.__module__)
-        course_dao: CourseDao = CourseDao()
-        return course_dao.read(id_course)
+    def display_students(self) -> None:
+        """Affiche la liste des étudiants."""
+
+        student_dao = StudentDao()
+        students = student_dao.read_all()
+
+        print("\n===== LISTE DES ÉTUDIANTS =====")
+
+        for student in students:
+            print(student)
+
+        print()
 
     def init_static(self) -> None:
         """Initialisation d'un jeu de test pour l'école."""

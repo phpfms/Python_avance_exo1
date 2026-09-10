@@ -57,6 +57,40 @@ class StudentDao(Dao[Student]):
 
         return student
 
+    def read_all(self) -> list[Student]:
+        """Renvoie la liste de tous les étudiants."""
+
+        students = []
+
+        with Dao.connection.cursor() as cursor:
+            sql = """
+                SELECT student.student_nbr,
+                       person.id_person,
+                       person.first_name,
+                       person.last_name,
+                       person.age
+                FROM student
+                JOIN person ON student.id_person = person.id_person
+                ORDER BY student.student_nbr
+            """
+
+            cursor.execute(sql)
+            records = cursor.fetchall()
+
+        for record in records:
+            student = Student(
+                record['first_name'],
+                record['last_name'],
+                record['age'],
+                record['student_nbr']
+            )
+
+            student.id_person = record['id_person']
+
+            students.append(student)
+
+        return students
+
     def update(self, student: Student) -> None:
         """Modifie un étudiant existant en BDD."""
 

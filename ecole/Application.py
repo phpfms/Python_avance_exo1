@@ -1,3 +1,5 @@
+# fichier qui permet à l'utilisateur de faire des choix numeriques
+
 from business.school import School
 from menu import Menu
 
@@ -5,14 +7,18 @@ from menu import Menu
 class Application:
 
     def __init__(self):
+        """Initialise l'application."""
         self.school = School()
         self.menu = Menu()
 
     def run(self):
-        #Lance l'application.
+        """Lance l'application."""
+
         self.school.init_static()
 
-        while True:
+        conti = True
+
+        while conti:
             choix = self.menu.display_main_menu()
 
             if choix == "1":
@@ -29,7 +35,7 @@ class Application:
 
             elif choix == "0":
                 print("Au revoir.")
-                break
+                conti = False
 
             else:
                 print("Choix invalide.")
@@ -37,12 +43,14 @@ class Application:
     def student_menu(self):
         """Gère le sous-menu des étudiants."""
 
-        while True:
+        conti = True
+
+        while conti:
             choix = self.menu.display_student_menu()
 
             if choix == "1":
                 print("Afficher les étudiants")
-                # self.school.display_students()
+                self.school.display_students()
 
             elif choix == "2":
                 print("Afficher les cours d'un étudiant")
@@ -53,7 +61,8 @@ class Application:
                 # self.school.display_student_teachers()
 
             elif choix == "0":
-                return
+                print("Retour au menu principal.")
+                conti = False
 
             else:
                 print("Choix invalide.")
@@ -61,7 +70,9 @@ class Application:
     def teacher_menu(self):
         """Gère le sous-menu des professeurs."""
 
-        while True:
+        conti = True
+
+        while conti:
             choix = self.menu.display_teacher_menu()
 
             if choix == "1":
@@ -77,7 +88,10 @@ class Application:
                 # ...
 
             elif choix == "4":
-                print("Afficher tous les élèves qui suivent au moins un cours du professeur")
+                print(
+                    "Afficher tous les élèves qui suivent "
+                    "au moins un cours du professeur"
+                )
                 # ...
 
             elif choix == "5":
@@ -85,7 +99,8 @@ class Application:
                 # ...
 
             elif choix == "0":
-                return
+                print("Retour au menu principal.")
+                conti = False
 
             else:
                 print("Choix invalide.")
@@ -93,7 +108,9 @@ class Application:
     def course_menu(self):
         """Gère le sous-menu des cours."""
 
-        while True:
+        conti = True
+
+        while conti:
             choix = self.menu.display_course_menu()
 
             if choix == "1":
@@ -108,7 +125,8 @@ class Application:
                 # ...
 
             elif choix == "0":
-                return
+                print("Retour au menu principal.")
+                conti = False
 
             else:
                 print("Choix invalide.")
@@ -116,7 +134,9 @@ class Application:
     def address_menu(self):
         """Gère le sous-menu des adresses."""
 
-        while True:
+        conti = True
+
+        while conti:
             choix = self.menu.display_address_menu()
 
             if choix == "1":
@@ -128,7 +148,8 @@ class Application:
                 # ...
 
             elif choix == "0":
-                return
+                print("Retour au menu principal.")
+                conti = False
 
             else:
                 print("Choix invalide.")

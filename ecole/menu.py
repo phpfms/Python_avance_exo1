@@ -1,3 +1,5 @@
+# fichier qui permet d'afficher le detail des menus choisis
+
 class Menu:
 
     def display_main_menu(self):
