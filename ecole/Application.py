@@ -5,7 +5,10 @@ from business.business_teacher import BusinessTeacher
 from business.business_course import BusinessCourse
 from business.business_address import BusinessAddress
 from business.business_person import BusinessPerson
-from display.display_student import DisplayStudent
+
+from displays.display_student import DisplayStudent
+from displays.display_course import DisplayCourse
+
 from menu import Menu
 
 
@@ -24,6 +27,7 @@ class Application:
 
         # Affichage
         self.display_student = DisplayStudent()
+        self.display_course = DisplayCourse()
 
     def run(self):
         """Lance l'application et affiche le menu principal."""
@@ -152,7 +156,8 @@ class Application:
 
             if choix == "1":
                 print("Afficher la liste des cours")
-                self.school.display_courses_list()
+                courses = self.course.get_courses()
+                self.display_course.display_courses_list(courses)
 
             elif choix == "2":
                 print("Afficher les étudiants d'un cours")

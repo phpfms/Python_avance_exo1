@@ -18,18 +18,9 @@ class BusinessCourse:
         """Récupère un cours grâce à son identifiant."""
         return self.course_dao.read(id_course)
 
-    def display_courses_list(self, courses) -> None:
-        """Affiche la liste des cours avec leur enseignant."""
-
-        for course in courses:
-            if course.teacher is not None:
-                print(
-                    f"- {course.name} : "
-                    f"{course.teacher.first_name} "
-                    f"{course.teacher.last_name}"
-                )
-            else:
-                print(f"- {course.name} : aucun enseignant")
+    def get_courses(self):
+        """Récupère la liste des cours."""
+        return self.course_dao.read_all()
 
     def add_course(self, course):
         """Ajoute un cours en base de données."""

@@ -20,7 +20,6 @@ if TYPE_CHECKING:
     from .teacher import Teacher
     from daos.teacher_dao import TeacherDao
 
-
 @dataclass
 class Course:
     """Cours enseigné à l'école :

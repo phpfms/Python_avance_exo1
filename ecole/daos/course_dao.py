@@ -5,6 +5,7 @@ Classe Dao[Course]
 """
 
 from models.course import Course
+from models.teacher import Teacher
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional
@@ -40,6 +41,61 @@ class CourseDao(Dao[Course]):
             course = None
 
         return course
+
+    def read_all(self) -> list[Course]:
+        """Renvoie la liste de tous les Cours."""
+
+        courses = []
+
+        with Dao.connection.cursor() as cursor:
+            sql = """
+                SELECT course.id_course,
+                       course.name,
+                       course.start_date,
+                       course.end_date,
+                       course.id_teacher,
+                       teacher.hiring_date,
+                       person.id_person,
+                       person.first_name,
+                       person.last_name,
+                       person.age
+                FROM course
+                JOIN teacher ON course.id_teacher = teacher.id_teacher
+                JOIN person ON teacher.id_person = person.id_person
+                ORDER BY course.name;
+            """
+
+            cursor.execute(sql)
+            records = cursor.fetchall()
+
+        for record in records:
+            # Création du cours
+            course = Course(
+                record['name'],
+                record['start_date'],
+                record['end_date']
+            )
+            course.id = record['id_course']
+
+            # Création de l'enseignant
+            teacher = Teacher(
+                record['first_name'],
+                record['last_name'],
+                record['age'],
+                record['hiring_date']
+                )
+
+            teacher.id_teacher = record['id_teacher']
+            teacher.id_person = record['id_person']
+
+            # Association du professeur au cours
+            course.set_teacher(teacher)
+
+            # Ajout du cours à la liste des cours
+            courses.append(course)
+
+        return courses
+
 
     def update(self, course: Course) -> bool:
         """Met à jour en BD l'entité Course correspondant à course, pour y correspondre
